@@ -9,7 +9,10 @@ import SongList from './components/SongList';
 import SongDetail from './components/SongDetail';
 import SongCreate from './components/SongCreate';
 
-const client = new ApolloClient({});
+// this is safe if we're using mongodb because all ids are unique across collections
+const client = new ApolloClient({
+  dataIdFromObject: (o) => o.id,
+});
 
 const Root = () => {
   return (

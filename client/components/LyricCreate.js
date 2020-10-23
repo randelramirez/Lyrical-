@@ -36,12 +36,28 @@ class LyricCreate extends Component {
   }
 }
 
+/*
+We added id on the returned lyrics so that the newly created lyric appear on the screen 
+(updates the UI and include the new lyric) 
+
+See also: index.js {
+  dataIdFromObject: (o) => o.id,
+}
+
+we can also use  refetchQueries: [{ query }] but this one will make another network request query to refresh the data
+
+we also added likes because we added likes on the fetchSongs query and because of that it no longer update
+the UI automatically if we don't add likes here as well
+
+*/
 const mutation = gql`
   mutation AddLyricToSong($content: String, $songId: ID!) {
     addLyricToSong(content: $content, songId: $songId) {
       id
       lyrics {
+        id
         content
+        likes
       }
     }
   }
